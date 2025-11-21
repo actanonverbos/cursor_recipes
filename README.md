@@ -19,6 +19,56 @@ I got tired of:
 
 This workflow takes **just a few minutes** from finding a recipe online to having a shopping list ready!
 
+## 🤖 Why Cursor Changes Everything
+
+**Cursor is ChatGPT with hands.**
+
+It doesn't just tell you what to do. **It actually does the work.**
+
+### What Cursor Can Do
+
+Cursor is ChatGPT with real tools. It can:
+- Read files
+- Create files
+- Edit them
+- Convert them
+- Organize folders
+- Run scripts
+- Process batches
+- Open results directly in the IDE
+
+**It turns your computer into a productivity operating system.**
+
+You prompt your work and it produces real files, projects, and assets.
+
+### What People Do Now
+
+Most people manually:
+- Copy data into folders
+- Create project docs
+- Rewrite content
+- Compress images
+- Convert files
+- Paste text into AI, then paste it back
+
+**Cursor collapses all of this into one step.**
+
+### See It In Action
+
+This recipe library is a perfect example. Instead of:
+1. Opening a recipe website
+2. Copying the text
+3. Pasting into a document
+4. Manually converting measurements
+5. Formatting everything
+6. Saving to the right folder
+
+You just say: **"Save this recipe: [URL]"**
+
+Cursor handles everything in seconds.
+
+> 📹 **Video coming soon** showing the full workflow in action!
+
 ## 🚀 Quick Start
 
 ### 1. Save a Recipe
@@ -32,7 +82,7 @@ In Cursor, just paste a recipe URL and the AI agent will automatically:
 
 **Example:**
 ```
-"Convert this recipe: https://example.com/banana-bread"
+"Save this recipe: https://example.com/banana-bread"
 ```
 
 The agent follows the rules defined in `.cursor/rules/recipe-url-to-markdown.mdc` to create a standardized format.
