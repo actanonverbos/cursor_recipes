@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Environment variables and secrets
+.env
+.env.local
+*.pem
+*.key
+
+# Generated files
+shopping_urls.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep Cursor rules
+!.cursor/
+
