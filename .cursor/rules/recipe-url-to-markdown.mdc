@@ -1,0 +1,106 @@
+---
+alwaysApply: false
+description: "When given a recipe URL, ALWAYS use the Firecrawl MCP tool to fetch the page directly (never skip this step) and generate a markdown recipe document in our house format, with metric (grams) ingredients and no HTML outputs."
+---
+
+## Recipe URL → Markdown rule
+
+When the user provides a **recipe URL**, follow this process to create a new markdown recipe file:
+
+- **1. Fetch the page with Firecrawl - MANDATORY FIRST STEP**
+  - **ALWAYS Use the `mcp_firecrawl-mcp_firecrawl_scrape` tool** to retrieve the recipe page content.
+  - **This step is REQUIRED even if web search results, browser data, or any other data sources contain the recipe information.**
+  - **Do NOT skip this step or substitute it with other data sources. Always fetch the page directly with Firecrawl.**
+  - Use the markdown format for easy parsing: `formats: ["markdown"]`
+  - The Firecrawl tool will handle all the page rendering and content extraction automatically
+
+- **2. Extract core recipe information**
+  - From the fetched content, identify:
+    - **Title** of the recipe
+    - **Source URL** (the URL the user gave you)
+    - **Yield** (servings, bars, etc.)
+    - **Prep time**, **chill time** (if specified), and **total time**
+    - **Ingredients list**
+    - **Instructions / method**
+    - Any extra **notes / tips** the author provides
+    - **Nutrition information per serving**, if it exists
+  - If any of these fields are missing in the source, omit that line/section instead of inventing data.
+
+- **3. Normalize recipe into our markdown structure**
+  - The new markdown file should follow this section layout:
+    - `# <Recipe Title>`
+    - Blank line
+    - Metadata lines as a bulleted list:
+      - `- Source: <URL>`
+      - `- Yield: <value>`
+      - `- Prep Time: <value>`
+      - `- Chill Time: <value>` (only if available)
+      - `- Total Time: <value>`
+    - Blank line
+    - `## Ingredients (metric)`
+    - A bulleted list of ingredients, **each starting with a gram value**, e.g.:
+      - `- 190g natural creamy peanut butter (just peanuts + salt)`
+    - Blank line
+    - `## Instructions`
+    - A numbered list of steps using the `1)` style, e.g.:
+      - `1) Do something...`
+      - `2) Do the next thing...`
+    - Blank line
+    - `## Notes`
+    - A bulleted list of notes, or a short paragraph. If there are no notes in the source, you may omit this section.
+    - Blank line
+    - `## Storage`
+    - A short description or bulleted list that clearly states how long the recipe keeps in the **fridge** and in the **freezer**, for example:
+      - `- Fridge: up to 1 week in an airtight container`
+      - `- Freezer: up to 3 months, well wrapped`
+    - Only include specific time ranges if the source (or user) provides enough information; otherwise keep the guidance conservative or omit this section entirely.
+    - Blank line
+    - `## Nutrition (per serving)` or `## Nutrition (per bar)` depending on context
+    - A bulleted list of nutrition facts (calories, macros, etc.) if provided. If no nutrition info is available, you may omit this section.
+    - Blank line
+    - `## Shopping List`
+    - A simplified bulleted list of grocery items needed, formatted for easy shopping automation:
+      - List core ingredients only (no measurements, no optional items)
+      - Use common grocery terms (e.g., "flour" not "all-purpose flour spooned and leveled")
+      - Combine similar items (e.g., just "eggs" not "2 large eggs, room temperature")
+      - Include approximate quantities in parentheses for reference (e.g., "Bananas (4)")
+      - Skip items that are typically already in pantry (salt, pepper, water, oil) unless they're specialty items
+    - Example format:
+      - `- Flour (250g)`
+      - `- Bananas (4)`
+      - `- Peanut butter (200g)`
+      - `- Dark chocolate (70g)`
+
+- **4. Ingredients must be metric-only (grams)**
+  - Convert volume-based or imperial measures into grams wherever reasonable, so ingredient lines look like this:
+    - `- 190g natural creamy peanut butter (just peanuts + salt)`
+    - `- 84g honey (or coconut palm syrup, if vegan)`
+  - Do **not** keep the original cups/tablespoons in the final ingredients list. The final list should be **grams-first**; you may retain short clarifying notes in parentheses.
+  - If an ingredient’s weight is unclear or highly variable (e.g. “1 pinch salt” or “1 clove garlic”), you may leave it as a non-gram description, but default to grams when at all practical.
+
+- **5. File naming and outputs**
+  - Create a **markdown file (`.md`) only** for the final recipe.
+  - Name the file using a sensible, kebab-case version of the recipe title (similar to `peanut-butter-cup-protein-bars-v2.md`), optionally with a version suffix where appropriate.
+  - **Do not keep or generate `.html` recipe files** as a final artifact:
+    - If HTML is used at any point (e.g. as an intermediate step or export), it should be treated as temporary.
+    - After you've produced the markdown file, ensure that any corresponding `.html` files are *not* kept in the project (delete or omit them).
+
+- **6. Categorize into folders by cooking method**
+  - Determine the **primary cooking method** for the recipe and save it in the appropriate folder:
+    - `baking/` - oven-baked goods (muffins, cakes, cookies, breads, pastries)
+    - `no-bake/` - recipes that require no cooking or baking
+    - `air-fryer/` - recipes specifically for air fryer cooking
+    - `slow-cooker/` - slow cooker or crockpot recipes
+    - `instant-pot/` - pressure cooker recipes
+    - `stovetop/` - cooked on the stove (soups, sauces, stir-fries, pan-fried items)
+    - `drinks/` - beverages, smoothies, shakes
+  - If a recipe uses multiple methods, choose the **primary or most defining method**.
+
+- **7. Style and consistency**
+  - Match this spacing and heading style:
+    - One blank line between major sections (`#` title, metadata list, `##` headings).
+    - Bullet lists for metadata, ingredients, notes, nutrition, and shopping list.
+    - Numbered steps with `1)`, `2)`, etc. for instructions.
+  - Include all sections in this order: Title, Metadata, Ingredients, Instructions, Notes, Storage, Nutrition, Shopping List
+  - The Shopping List section is REQUIRED for all new recipes to enable shopping automation.
+

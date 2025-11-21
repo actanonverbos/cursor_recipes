@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments (if you add dependencies later)
+venv/
+env/
+ENV/
+
+# Generated files
+shopping_urls.txt
+shopping_list.md
+
+# Debug screenshots
+debug_*.png
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
