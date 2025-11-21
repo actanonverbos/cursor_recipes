@@ -1,4 +1,4 @@
-# Recipe Library 🍳
+# Cursor Recipes 🍳
 
 A smart recipe management system powered by AI that converts web recipes to markdown and generates instant shopping links. Built to work seamlessly with Cursor AI agent.
 
@@ -108,7 +108,7 @@ python3 shop_interactive.py
 ## 📁 Project Structure
 
 ```
-recipes_library/
+cursor-recipes/
 ├── recipes/               # All your saved recipes
 │   ├── baking/           # Oven-baked goods
 │   ├── no-bake/          # No cooking required
